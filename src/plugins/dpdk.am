@@ -35,7 +35,7 @@ dpdk_plugin_la_CFLAGS = $(AM_CFLAGS) -DDPDK_VOID_CALLBACK=0 -DDPDK_NO_AEAD=0
 dpdk_plugin_la_LDFLAGS += -Wl,-lnuma
 endif
 
-dpdk_plugin_la_LDFLAGS += -Wl,-lm,-ldl
+dpdk_plugin_la_LDFLAGS += -Wl,-lm,-ldl,-lmusdk
 
 dpdk_plugin_la_SOURCES =					\
   dpdk/main.c							\

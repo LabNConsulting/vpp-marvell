@@ -41,13 +41,15 @@ ISA_L_CRYPTO_VER := 2.18.0
 
 ifeq ($(MACHINE),$(filter $(MACHINE),x86_64))
   AESNI ?= y
+  ifeq ($(AESNI),y)
 # DPDK pre 17.08 depends on ISA-L Crypto library for GCM PMD
-  ifneq ($(firstword $(sort $(DPDK_VERSION), 17.08)), 17.08)
-  ISA_L_CRYPTO_LIB = y
-  IPSEC_MB_VER = 0.45
-  $(info Building ISA-L Crypto $(ISA_L_CRYPTO_VER) library)
+    ifneq ($(firstword $(sort $(DPDK_VERSION), 17.08)), 17.08)
+    ISA_L_CRYPTO_LIB = y
+    IPSEC_MB_VER = 0.45
+    $(info Building ISA-L Crypto $(ISA_L_CRYPTO_VER) library)
+    endif
+    $(info Building IPSec-MB $(IPSEC_MB_VER) library)
   endif
-$(info Building IPSec-MB $(IPSEC_MB_VER) library)
 else
   AESNI ?= N
 endif

@@ -101,20 +101,23 @@ AC_DEFUN([DPDK_IS_PMD_ENABLED],
 AC_DEFUN([DETECT_DPDK_IS_1702_OR_1705],
 [
   AC_MSG_CHECKING([for RTE_VERSION 17.02/17.05 in rte_version.h])
-  AC_TRY_RUN(
-    [
-    #include <rte_version.h>
-    int main()
-    {
-      return ((RTE_VER_YEAR != 17) ||
-	      (RTE_VER_MONTH != 2 && RTE_VER_MONTH != 5));
-    }
-    ],
-    [dpdk_is_1702_or_1705=yes]
-    [AC_MSG_RESULT([yes])],
-    [dpdk_is_1702_or_1705=no]
-    [AC_MSG_RESULT([no])]
-  )
+  AS_IF([test "$cross_compiling" != "yes"],
+  [
+    AC_TRY_RUN(
+      [
+      #include <rte_version.h>
+      int main()
+      {
+        return ((RTE_VER_YEAR != 17) ||
+	        (RTE_VER_MONTH != 1 && RTE_VER_MONTH != 5));
+      }
+      ],
+      [dpdk_is_1702_or_1705=yes]
+      [AC_MSG_RESULT([yes])],
+      [dpdk_is_1702_or_1705=no]
+      [AC_MSG_RESULT([no])]
+    )
+  ])
   AM_CONDITIONAL(DPDK_IS_1702_OR_1705, test "$dpdk_is_1702_or_1705" = "yes")
 ])
 

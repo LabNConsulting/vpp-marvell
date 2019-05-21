@@ -499,18 +499,7 @@ arch_lib_dir = lib$($(BASIC_ARCH)_libdir)
 TOOL_INSTALL_LIB_DIR=$(TOOL_INSTALL_DIR)/$(TARGET)/$(arch_lib_dir)
 DYNAMIC_LINKER=${shell cd $(TOOL_INSTALL_LIB_DIR); echo ld*.so.*}
 
-# Pad dynamic linker & rpath so elftool will never have to change ELF section sizes.
-# Yes, this is a kludge.
-lots_of_slashes_to_pad_names = "/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"
-
-# When PLATFORM != native we *always* use our own versions of GLIBC and dynamic linker
-# Allow per-platform overrides
 CROSS_LDFLAGS = $(strip $($(PLATFORM)_cross_ldflags))
-ifeq ($(CROSS_LDFLAGS),)
-  CROSS_LDFLAGS =											\
-    -Wl,--dynamic-linker=$(lots_of_slashes_to_pad_names)$(TOOL_INSTALL_LIB_DIR)/$(DYNAMIC_LINKER)	\
-    -Wl,-rpath -Wl,$(lots_of_slashes_to_pad_names)$(TOOL_INSTALL_LIB_DIR)
-endif
 
 cross_ldflags = $(if $(is_native)$(is_build_tool),,$(CROSS_LDFLAGS) )
 

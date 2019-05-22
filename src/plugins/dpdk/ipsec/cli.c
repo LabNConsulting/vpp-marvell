@@ -127,26 +127,27 @@ lcore_cryptodev_map_fn (vlib_main_t * vm, unformat_input_t * input,
   u16 detail = 0;
   clib_error_t *error = NULL;
 
-  if (!unformat_user (input, unformat_line_input, line_input))
-    return 0;
-
-  while (unformat_check_input (line_input) != UNFORMAT_END_OF_INPUT)
+  if (unformat_user (input, unformat_line_input, line_input))
     {
-      if (unformat (line_input, "verbose"))
-	detail = 1;
-      else
-	{
-	  error = clib_error_return (0, "parse error: '%U'",
-				     format_unformat_error, line_input);
-	  goto done;
-	}
+
+      while (unformat_check_input (line_input) != UNFORMAT_END_OF_INPUT)
+        {
+          if (unformat (line_input, "verbose"))
+	    detail = 1;
+          else
+	    {
+	      error = clib_error_return (0, "parse error: '%U'",
+				         format_unformat_error, line_input);
+              unformat_free (line_input);
+	      goto done;
+	    }
+        }
+        unformat_free (line_input);
     }
 
   dpdk_ipsec_show_mapping (vm, detail);
 
 done:
-  unformat_free (line_input);
-
   return error;
 }
 

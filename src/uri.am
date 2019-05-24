@@ -23,6 +23,7 @@ libvppcom_la_DEPENDENCIES = 	\
 	libvlibmemoryclient.la
 
 libvppcom_la_LIBADD = $(libvppcom_la_DEPENDENCIES) -lpthread
+libvppcom_la_LDFLAGS += -L$(libdir)
 
 libvppcom_la_SOURCES +=				\
   uri/vppcom.c

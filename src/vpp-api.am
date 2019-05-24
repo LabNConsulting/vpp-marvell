@@ -23,6 +23,7 @@ libvppapiclient_la_LIBADD = \
   -lpthread -lm -lrt
 
 libvppapiclient_la_LDFLAGS = \
+  -L$(libdir) $(AM_LDFLAGS) \
   -Wl,-L$(top_builddir)/.libs,--whole-archive,-l:libsvm.a,-l:libvppinfra.a,-l:libvlibmemoryclient.a,--no-whole-archive \
   -Wl,--version-script=$(srcdir)/vpp-api/client/libvppapiclient.map,-lrt
 

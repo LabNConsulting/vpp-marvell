@@ -12,6 +12,7 @@
 # limitations under the License.
 
 libvatplugin_la_LIBADD = libvppinfra.la
+libvatplugin_la_LDFLAGS = -L$(libdir)
 libvatplugin_la_DEPENDENCIES = libvppinfra.la
 libvatplugin_la_SOURCES = \
   vat/plugin_api.c

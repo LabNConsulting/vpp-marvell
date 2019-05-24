@@ -16,6 +16,7 @@ lib_LTLIBRARIES += libvlibmemory.la libvlibmemoryclient.la \
 
 libvlibmemory_la_DEPENDENCIES = libvppinfra.la libsvm.la libvlib.la
 libvlibmemory_la_LIBADD = $(libvlibmemory_la_DEPENDENCIES) -lpthread
+libvlibmemory_la_LDFLAGS = -L$(libdir)
 libvlibmemory_la_SOURCES =			\
 	vlibapi/api.h				\
         vlibapi/api_helper_macros.h		\
@@ -37,6 +38,7 @@ nobase_include_HEADERS += vlibapi/api.h		\
 
 libvlibmemoryclient_la_DEPENDENCIES = libvppinfra.la libsvm.la
 libvlibmemoryclient_la_LIBADD = $(libvlibmemoryclient_la_DEPENDENCIES) -lpthread
+libvlibmemoryclient_la_LDFLAGS = -L$(libdir)
 libvlibmemoryclient_la_SOURCES = 		\
         vlibapi/api_helper_macros.h		\
 	vlibapi/api_shared.c			\
@@ -60,6 +62,7 @@ nobase_include_HEADERS +=			\
 
 libvlibsocket_la_DEPENDENCIES = libvppinfra.la libvlib.la libvlibmemory.la
 libvlibsocket_la_LIBADD = $(libvlibsocket_la_DEPENDENCIES)
+libvlibsocket_la_LDFLAGS = -L$(libdir)
 libvlibsocket_la_SOURCES =			\
 	vlibsocket/api.h			\
 	vlibsocket/sockclnt.api			\

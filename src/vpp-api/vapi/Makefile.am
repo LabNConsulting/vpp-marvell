@@ -15,9 +15,9 @@ AUTOMAKE_OPTIONS = foreign
 ACLOCAL_AMFLAGS = -I m4
 AM_LIBTOOLFLAGS = --quiet
 
-AM_CFLAGS = -Wall -I${top_srcdir} -I${top_builddir} -I. -I$(top_srcdir)/vpp-api/
+AM_CFLAGS = -Wall -I${top_srcdir} -I${top_builddir} -I. -I$(top_srcdir)/vpp-api/ $(EXTRA_CFLAGS)
 
-AM_LDFLAGS = -shared -avoid-version -rpath /none -no-undefined
+AM_LDFLAGS = -shared -avoid-version -rpath /none -no-undefined $(EXTRA_LDFLAGS)
 
 bin_PROGRAMS =
 noinst_LTLIBRARIES =
@@ -56,6 +56,7 @@ libvapiclient_la_LIBADD = -lpthread -lm -lrt \
   $(top_builddir)/libsvm.la
 
 libvapiclient_la_LDFLAGS = \
+  $(EXTRA_LDFLAGS) \
   -Wl,-L$(top_builddir)/.libs,--whole-archive,--no-whole-archive \
   -Wl,--version-script=$(srcdir)/libvapiclient.map,-lrt
 

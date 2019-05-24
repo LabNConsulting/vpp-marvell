@@ -19,7 +19,8 @@ AUTOMAKE_OPTIONS = foreign subdir-objects
 ACLOCAL_AMFLAGS = -I m4
 AM_LIBTOOLFLAGS = --quiet
 
-AM_CFLAGS = -Wall
+AM_CFLAGS = -Wall $(EXTRA_CFLAGS)
+AM_LDFLAGS = $(EXTRA_LDFLAGS)
 
 SUBDIRS = .
 SUFFIXES = .api.h .api .api.json

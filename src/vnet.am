@@ -22,6 +22,7 @@ libvnet_la_DEPENDENCIES = \
 	libvlibmemory.la
 
 libvnet_la_LIBADD = $(libvnet_la_DEPENDENCIES) -lm -lpthread -ldl -lrt
+libvnet_la_LDFLAGS = -L$(libdir) $(AM_LDFLAGS)
 
 if WITH_LIBSSL
 libvnet_la_LIBADD += -lcrypto
